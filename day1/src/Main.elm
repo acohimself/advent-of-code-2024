@@ -19,8 +19,11 @@ import Maybe exposing (Maybe, withDefault)
 import Set exposing (fromList, toList)
 import String exposing (lines, toInt, words)
 
+
 title : String
-title = "Day 1: Historian Hysteria"
+title =
+    "Day 1: Historian Hysteria"
+
 
 type alias Model =
     { input : String
@@ -38,7 +41,7 @@ initialModel =
 
 
 type Msg
-    = InputFrequencyText String
+    = InputText String
     | Solve
     | LoadFromCache
 
@@ -127,7 +130,7 @@ solvePart2 ( l1, l2 ) =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        InputFrequencyText text ->
+        InputText text ->
             { model | input = text }
 
         Solve ->
@@ -166,7 +169,7 @@ view model =
                         , rows 3
                         , placeholder "Paste input text here"
                         , required True
-                        , onInput InputFrequencyText
+                        , onInput InputText
                         ]
                         [ text model.input ]
                     ]

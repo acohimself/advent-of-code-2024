@@ -18,8 +18,11 @@ import List exposing (filter, length, map, reverse, sort, sum)
 import Maybe exposing (Maybe, withDefault)
 import String exposing (lines, toInt, words)
 
+
 title : String
-title = "Day 2: Red-Nosed Reports"
+title =
+    "Day 2: Red-Nosed Reports"
+
 
 type alias Model =
     { input : String
@@ -37,7 +40,7 @@ initialModel =
 
 
 type Msg
-    = InputFrequencyText String
+    = InputText String
     | Solve
     | LoadFromCache
 
@@ -58,6 +61,7 @@ part1 input =
         |> sum
 
 
+solve1 : List Int -> Int
 solve1 xs =
     let
         numbersAreClose numbers =
@@ -93,13 +97,12 @@ part2 input =
         |> map words
         |> map (map toInt)
         |> map (map (withDefault 0))
-        |> Debug.log "I"
         |> map solve2
-        |> Debug.log "S"
         |> filter (\x -> x)
         |> length
 
 
+solve2 : List Int -> Bool
 solve2 input =
     let
         checkDistanceAndDirection : Int -> Int -> Direction -> Bool
@@ -141,7 +144,7 @@ solve2 input =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        InputFrequencyText text ->
+        InputText text ->
             { model | input = text }
 
         Solve ->
@@ -180,7 +183,7 @@ view model =
                         , rows 3
                         , placeholder "Paste input text here"
                         , required True
-                        , onInput InputFrequencyText
+                        , onInput InputText
                         ]
                         [ text model.input ]
                     ]

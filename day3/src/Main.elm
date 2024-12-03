@@ -41,7 +41,7 @@ initialModel =
 
 
 type Msg
-    = InputFrequencyText String
+    = InputText String
     | Solve
     | LoadFromCache
 
@@ -51,6 +51,7 @@ cutToMulPosition s position =
     dropLeft position s
 
 
+processPotentialMul : String -> Int
 processPotentialMul s =
     case split "," s of
         x1 :: rest ->
@@ -133,7 +134,7 @@ part2 input =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        InputFrequencyText text ->
+        InputText text ->
             { model | input = text }
 
         Solve ->
@@ -172,7 +173,7 @@ view model =
                         , rows 3
                         , placeholder "Paste input text here"
                         , required True
-                        , onInput InputFrequencyText
+                        , onInput InputText
                         ]
                         [ text model.input ]
                     ]
