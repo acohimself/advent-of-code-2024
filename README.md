@@ -1,6 +1,6 @@
-# Advent of code 2023
+# Advent of code 2024
 
-Elm Solutions for [Advent of Code 2023](https://adventofcode.com/2023/)
+Elm Solutions for [Advent of Code 2024](https://adventofcode.com/2024/)
 
 I use this challange to get familiar with Elm.
 
@@ -8,7 +8,7 @@ Solutions are not the smartest or fastest.
 
 # Inspiration
 
-Inspired by [Jesse Warden](https://jessewarden.com/2019/01/advent-of-code-2018-in-elm-review.html)
+Inspired by [Jesse Warden](https://github.com/jesterxl)
 
 ## Requirements
 * make
