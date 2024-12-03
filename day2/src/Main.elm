@@ -14,10 +14,9 @@ import Browser
 import Html exposing (Html, a, button, div, form, h2, i, input, label, text, textarea)
 import Html.Attributes exposing (action, class, for, placeholder, required, rows, style, type_)
 import Html.Events exposing (onClick, onInput)
-import List exposing (filter, head, length, map, reverse, sort, sum, tail)
+import List exposing (filter, length, map, reverse, sort, sum)
 import Maybe exposing (Maybe, withDefault)
-import Regex
-import String exposing (dropLeft, fromList, lines, startsWith, toInt, uncons, words)
+import String exposing (lines, toInt, words)
 
 title : String
 title = "Day 2: Red-Nosed Reports"

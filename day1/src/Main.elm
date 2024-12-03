@@ -14,11 +14,10 @@ import Browser
 import Html exposing (Html, a, button, div, form, h2, i, input, label, text, textarea)
 import Html.Attributes exposing (action, class, for, placeholder, required, rows, style, type_)
 import Html.Events exposing (onClick, onInput)
-import List exposing (filter, head, length, map, sort, sum, unzip)
+import List exposing (filter, length, map, sort, sum, unzip)
 import Maybe exposing (Maybe, withDefault)
 import Set exposing (fromList, toList)
 import String exposing (lines, toInt, words)
-import Tuple exposing (first)
 
 title : String
 title = "Day 1: Historian Hysteria"
