@@ -108,8 +108,8 @@ countMas ( x, y ) g =
         + evaluate ru
 
 
-countAs : ( Int, Int ) -> Grid Char -> Int
-countAs ( x, y ) g =
+countCrosses : ( Int, Int ) -> Grid Char -> Int
+countCrosses ( x, y ) g =
     let
         nw =
             get ( x - 1, y - 1 ) g
@@ -172,7 +172,7 @@ part2 input =
         countCrossMas ( x, y ) ( g, a ) =
             case get ( x, y ) g of
                 Just 'A' ->
-                    ( g, a + countAs ( x, y ) g )
+                    ( g, a + countCrosses ( x, y ) g )
 
                 _ ->
                     ( g, a )
