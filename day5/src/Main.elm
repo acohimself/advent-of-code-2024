@@ -148,7 +148,6 @@ part1 input =
     in
     updates
         |> filterMap (isValid rules)
-        |> Debug.log "ace"
         |> map findMiddlePageNumber
         |> sum
 
