@@ -108,33 +108,36 @@ findMiddlePageNumber u =
         |> withDefault 0
 
 
+compareAccordingToRules : Rules -> Int -> Int -> Order
+compareAccordingToRules r a b =
+    case get a r of
+        Nothing ->
+            LT
 
--- returns true if the rules are broken
+        Just rs ->
+            if member b rs then
+                GT
+
+            else
+                LT
 
 
-checkRule : List Int -> List Int -> Bool
-checkRule rest rulesList =
-    case rulesList of
-        r :: rs ->
-            member r rest || checkRule rest rs
+isValid : Rules -> Update -> Maybe Update
+isValid rules u =
+    if u == sortWith (compareAccordingToRules rules) u then
+        Just u
 
-        [] ->
-            False
+    else
+        Nothing
 
 
-checkPage : Rules -> Update -> Bool
-checkPage r u =
-    case u of
-        p :: rest ->
-            case get p r of
-                Just rvs ->
-                    checkRule rest rvs || checkPage r rest
+isInvalid : Rules -> Update -> Maybe Update
+isInvalid rules u =
+    if u == sortWith (compareAccordingToRules rules) u then
+        Nothing
 
-                Nothing ->
-                    checkPage r rest
-
-        _ ->
-            False
+    else
+        Just u
 
 
 part1 : String -> Int
@@ -142,24 +145,10 @@ part1 input =
     let
         ( rules, updates ) =
             parse input
-
-        breakingRules =
-            map (checkPage rules) updates
-
-        filterBroken : List Update -> List Bool -> List Update
-        filterBroken u b =
-            case ( b, u ) of
-                ( False :: bs, good :: us ) ->
-                    good :: filterBroken us bs
-
-                ( True :: bs, _ :: us ) ->
-                    filterBroken us bs
-
-                _ ->
-                    []
     in
-    breakingRules
-        |> filterBroken updates
+    updates
+        |> filterMap (isValid rules)
+        |> Debug.log "ace"
         |> map findMiddlePageNumber
         |> sum
 
@@ -169,38 +158,10 @@ part2 input =
     let
         ( rules, updates ) =
             parse input
-
-        breakingRules =
-            map (checkPage rules) updates
-
-        filterValid : List Update -> List Bool -> List Update
-        filterValid u b =
-            case ( b, u ) of
-                ( False :: bs, _ :: us ) ->
-                    filterValid us bs
-
-                ( True :: bs, bad :: us ) ->
-                    bad :: filterValid us bs
-
-                _ ->
-                    []
-
-        sorter : Rules -> Int -> Int -> Order
-        sorter r a b =
-            case get a r of
-                Nothing ->
-                    LT
-
-                Just rs ->
-                    if member b rs then
-                        GT
-
-                    else
-                        LT
     in
-    breakingRules
-        |> filterValid updates
-        |> map (sortWith (sorter rules))
+    updates
+        |> filterMap (isInvalid rules)
+        |> map (sortWith (compareAccordingToRules rules))
         |> map findMiddlePageNumber
         |> sum
 
