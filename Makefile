@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help day1 day2 day3 day4 day5 day6 day7
+.PHONY: help day1 day2 day3 day4 day5 day6 day7 day8 day9
 
 help:
 	$(info Advent of code 2024)
@@ -26,4 +26,10 @@ day6: ## Run elm-live for day6
 
 day7: ## Run elm-live for day7
 	cd day7 && elm-live src/Main.elm --start-page=Main.html -- --output=elm.js
+
+day8: ## Run elm-live for day8
+	cd day8 && elm-live src/Main.elm --start-page=Main.html -- --output=elm.js
+
+day9: ## Run elm-live for day9
+	cd day9 && elm-live src/Main.elm --start-page=Main.html -- --output=elm.js
 
